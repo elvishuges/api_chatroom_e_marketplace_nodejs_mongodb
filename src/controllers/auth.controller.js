@@ -20,19 +20,16 @@ exports.login = async function (req, res) {
         }
 
         if (!(await bcrypt.compare(password, userFound.password))) {
-            return res.status(400).send({ error: "Usuário ou senha incorretos" });
+            return res.status(400).send({ message: "Usuário ou senha incorretos" });
         }
 
         const user = await User.findOne({ email }).populate('role');
 
-        res.send({
-            user,
-            token: generateToken({ user: user })
-        });
+        res.status(200).send({ user, token: generateToken({ user: user }) });
 
     } catch (error) {
         console.log('error', error);
-        return res.status(400).send({ error: " Algo deu errado na aplicação" });
+        return res.status(400).send({ message: " Algo deu errado na aplicação" });
     }
 };
 

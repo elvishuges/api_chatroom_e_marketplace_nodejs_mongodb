@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 var app = express();
 const server = require('http').createServer(app)
 
-require('./socker/socket').listen(server)
+require('./socket/socket').listen(server)
 const port = 4000;
 //BODY parse of requistion
 
