@@ -1,22 +1,31 @@
 let userListSocket = [];
-function joinUser(socketId, user, roomName) {
-    const userSocket = {
-        socketID: socketId,
-        user: user,
-        roomname: roomName
-    }
-    userListSocket.push(userSocket)
-    return userSocket;
+function joinUser(socketId, user, roomTitle) {
+  const userSocket = {
+    socketID: socketId,
+    user: user,
+    roomTitle: roomTitle,
+  };
+  userListSocket.push(userSocket);
+  return userSocket;
 }
 function removeUser(id) {
-    const getID = userListSocket => userListSocket.socketID === id;
-    const index = userListSocket.findIndex(getID);
-    if (index !== -1) {
-        return userListSocket.splice(index, 1)[0];
-    }
+  const getID = (userListSocket) => userListSocket.socketID === id;
+  const index = userListSocket.findIndex(getID);
+  if (index !== -1) {
+    return userListSocket.splice(index, 1)[0];
+  }
+}
+
+function findUser(email) {
+  const getID = (userListSocket) => userListSocket.user.email === email;
+  const index = userListSocket.findIndex(getID);
+  if (index !== -1) {
+    return true;
+  }
+  return false;
 }
 
 function getUsers() {
-    return userListSocket
+  return userListSocket;
 }
-module.exports = { joinUser, removeUser, getUsers }
+module.exports = { joinUser, removeUser, getUsers, findUser };
