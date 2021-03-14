@@ -1,20 +1,21 @@
-/* register-handler.js */
 const {
   joinUser,
   removeUser,
   getUsers,
   findUser,
+  getUserByRoomTitle,
 } = require("./userListSocket");
 const roomName = "InitialPage";
 
-function inInitialPage(socket, data, io) {
+function onRoom(socket, data, io) {
   const { user } = data;
   const { roomTitle } = data;
 
   let userJoined = joinUser(socket.id, user, roomTitle);
-  io.to(roomTitle).emit("newLogedSocket", { data: userJoined });
+  io.to(roomTitle).emit("newUserInRoom", { data: userJoined });
   socket.join(roomTitle);
-  socket.emit("logedSocketList", getUsers());
+  let users = getUserByRoomTitle(roomTitle);
+  socket.emit("logedUsersList", users);
 }
 
 function chatMessageFromRoom(data, io) {
@@ -25,4 +26,4 @@ function disconnect(socket, io) {
   const user = removeUser(socket.id);
 }
 
-module.exports = { inInitialPage, disconnect, chatMessageFromRoom };
+module.exports = { onRoom, disconnect, chatMessageFromRoom };

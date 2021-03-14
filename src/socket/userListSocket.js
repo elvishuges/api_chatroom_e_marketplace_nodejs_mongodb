@@ -26,6 +26,24 @@ function findUser(email) {
 }
 
 function getUsers() {
-  return userListSocket;
+  return userListSocket.map((socket) => {
+    return socket.user;
+  });
 }
-module.exports = { joinUser, removeUser, getUsers, findUser };
+
+function getUserByRoomTitle(roomTitle) {
+  return userListSocket
+    .filter((socket) => {
+      return socket.roomTitle == roomTitle;
+    })
+    .map((socket) => {
+      return socket.user;
+    });
+}
+module.exports = {
+  joinUser,
+  removeUser,
+  getUsers,
+  findUser,
+  getUserByRoomTitle,
+};
