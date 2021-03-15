@@ -33,12 +33,8 @@ function getUsers() {
 
 function getUserByRoomTitle(roomTitle) {
   return userListSocket
-    .filter((socket) => {
-      return socket.roomTitle == roomTitle;
-    })
-    .map((socket) => {
-      return socket.user;
-    });
+    .filter((socket) => socket.roomTitle == roomTitle)
+    .map((socket) => socket.user);
 }
 module.exports = {
   joinUser,

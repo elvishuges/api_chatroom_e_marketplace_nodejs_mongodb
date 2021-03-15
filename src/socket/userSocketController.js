@@ -18,8 +18,10 @@ function onRoom(socket, data, io) {
   socket.emit("logedUsersList", users);
 }
 
-function chatMessageFromRoom(data, io) {
-  io.to(data.roomTitle).emit("chatMessageToRoom", { data: data.message });
+function chatMessageFromRoom(roomTitle, message, userEmail, io) {
+  io.to(roomTitle).emit("chatMessageToRoom", {
+    data: { message: message, userEmail: userEmail },
+  });
 }
 
 function disconnect(socket, io) {

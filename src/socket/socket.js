@@ -16,7 +16,8 @@ module.exports.listen = function (server) {
     });
 
     socket.on("chatMessageFromRoom", function (data) {
-      chatMessageFromRoom(data, io);
+      let { roomTitle, message, userEmail } = data;
+      chatMessageFromRoom(roomTitle, message, userEmail, io);
     });
     socket.on("logedUsersByRoom", function (data) {
       chatMessageFromRoom(data, io);
