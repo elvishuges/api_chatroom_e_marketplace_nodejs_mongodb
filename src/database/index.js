@@ -3,8 +3,6 @@ mongoose.Promise = global.Promise;
 
 const roles = ["Admin", "Common"];
 const dbConfig = require("./../config/db.config");
-//mongodb://${dbConfig.HOST}/${dbConfig.DB}
-//`mongodb+srv://root:root@apichat.0hwbp.mongodb.net/apichat?retryWrites=true&w=majority`
 mongoose
   .connect(
     dbConfig.HOST,

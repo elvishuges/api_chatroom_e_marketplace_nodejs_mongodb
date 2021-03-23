@@ -5,23 +5,22 @@ var app = express();
 const server = require("http").createServer(app);
 
 require("./socket/socket").listen(server);
-const port = 4000;
 //BODY parse of requistion
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("Wellcome to Mongodb API");
-});
-
 const userRoutes = require("./routes/user.routes");
 const authRoutes = require("./routes/auth.routes");
+const testRoutes = require("./routes/test.routes");
 
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/test", testRoutes);
 
-server.listen(process.env.PORT || port, function () {
+var port = process.env.PORT || 4000;
+
+server.listen(port, function () {
   console.log(`-- Listening on port ${port} --`);
 });
