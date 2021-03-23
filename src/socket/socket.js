@@ -3,6 +3,7 @@ const {
   onRoom,
   disconnect,
   chatMessageFromRoom,
+  userOutRoom,
 } = require("./userSocketController");
 
 module.exports.listen = function (server) {
@@ -11,20 +12,25 @@ module.exports.listen = function (server) {
     console.log("connection:", socket.id);
 
     socket.on("onRoom", function (data) {
-      console.log("onRoom data:", data);
       onRoom(socket, data, io);
     });
 
     socket.on("chatMessageFromRoom", function (data) {
-      let { roomTitle, message, userEmail } = data;
-      chatMessageFromRoom(roomTitle, message, userEmail, io);
+      let { roomTitle, message, userEmail, username } = data;
+      chatMessageFromRoom(roomTitle, message, userEmail, username, io);
     });
+
     socket.on("logedUsersByRoom", function (data) {
       chatMessageFromRoom(data, io);
     });
 
+    socket.on("userOutRoom", function (data) {
+      console.log("userOut data", data);
+      let { roomTitle, user } = data;
+      userOutRoom(roomTitle, user, io);
+    });
+
     socket.on("disconnect", function () {
-      console.log("disconnect:", socket.id);
       disconnect(socket, io);
     });
   });

@@ -1,5 +1,5 @@
+require("dotenv/config");
+
 module.exports = {
-    HOST: "localhost",
-    PORT: 27017,
-    DB: "noderest"
+  HOST: process.env.HOST,
 };

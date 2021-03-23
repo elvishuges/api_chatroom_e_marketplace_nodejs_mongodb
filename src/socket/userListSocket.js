@@ -6,7 +6,7 @@ function joinUser(socketId, user, roomTitle) {
     roomTitle: roomTitle,
   };
   userListSocket.push(userSocket);
-  return userSocket;
+  return userSocket.user;
 }
 function removeUser(id) {
   const getID = (userListSocket) => userListSocket.socketID === id;
