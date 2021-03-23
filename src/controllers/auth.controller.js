@@ -11,6 +11,7 @@ function generateToken(params = {}) {
 }
 
 exports.login = async function (req, res) {
+  console.log("LOGIN");
   try {
     const { email, password } = req.body;
     const userFound = await User.findOne({ email }).select("password");
