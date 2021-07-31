@@ -11,7 +11,6 @@ function generateToken(params = {}) {
 }
 
 exports.login = async function (req, res) {
-  console.log("LOGIN");
   try {
     const { email, password } = req.body;
     const userFound = await User.findOne({ email }).select("password");
@@ -23,7 +22,8 @@ exports.login = async function (req, res) {
       return res.status(400).send({ error: "Usuário ou senha incorretos" });
     }
 
-    const user = await User.findOne({ email }).populate("role");
+    const user = await User.findOne({ email }).populate("role", "name");
+    console.log("USERRRRRRR", user);
 
     res.status(200).send({ user, token: generateToken({ user: user }) });
   } catch (error) {
@@ -48,6 +48,7 @@ exports.register = async function (req, res) {
       }).save();
 
       userFound = await User.findOne({ email }).populate("role");
+
       res.send({ user: userFound, token: generateToken({ user: userFound }) });
     }
   } catch (error) {

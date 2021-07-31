@@ -13,10 +13,12 @@ app.use(cors());
 
 const userRoutes = require("./routes/user.routes");
 const authRoutes = require("./routes/auth.routes");
+const mercadoRoutes = require("./routes/mercado.routes");
 const testRoutes = require("./routes/test.routes");
 
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
+app.use("/mercado", mercadoRoutes);
 app.use("/test", testRoutes);
 
 var port = process.env.PORT || 4000;
