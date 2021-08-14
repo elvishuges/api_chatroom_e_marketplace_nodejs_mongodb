@@ -28,11 +28,12 @@ async function creteUserAdmin() {
   const Role = require("./../models/role.model");
   const Category = require("./../models/category.model");
   const MarketPlace = require("./../models/marketplace.model");
+
   let roleFound = await Role.findOne({ name: "Admin" });
   let user = await User.find({ role: roleFound._id });
   let category = await Category.find();
   let marketPlace = await MarketPlace.find();
-  console.log("marketPlace", marketPlace);
+
   if (!user.length) {
     const user = await new User({
       username: "Jaque Huges",
