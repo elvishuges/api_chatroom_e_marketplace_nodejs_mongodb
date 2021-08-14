@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 let ProductSchema = new Schema({
   name: { type: String },
-  categories: { type: String, ref: "Category" },
+  price: { type: Schema.Types.Decimal128 },
+  category: { type: String, ref: "Category" },
   createdAt: { type: Date, default: Date.now },
 });
 
